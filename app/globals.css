@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-blues: #031759;
+  --color-yellows: #FDCE01;
+  --color-dark: #010014;
+  --color-light: #E6E6F5;
+  --color-gray: #3F3E4E;
+}
+
+* {
+  /* border: 1px solid red; */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.btn-alpha {
+  @apply text-center hover:bg-yellows hover:text-blues hover:scale-95 duration-300 hover:rounded-full hover:shadow-amber-200 hover:shadow-md hover:cursor-pointer
+}
+
+.btn-beta {
+  @apply bg-indigo-600 hover:contrast-150 text-white rounded hover:scale-99 duration-300 hover:shadow-md shadow-indigo-500 shadow-sm hover:cursor-pointer
+}
+
+.tracking-text-before {
+ @apply text-amber-200 
+}
+.tracking-text-now {
+ @apply text-amber-400 scale-105  
+}
+.tracking-text-after {
+ @apply text-slate-300 
+}
+
+.tracking-icon-before {
+ @apply bg-amber-200 
+}
+.tracking-icon-now {
+ @apply bg-amber-400 scale-105  
+}
+.tracking-icon-after {
+ @apply bg-slate-300 
+}

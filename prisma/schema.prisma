@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String  @id @default(cuid())
+  name          String?
+  nip           String? @unique
+  email         String? @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  createdAt     DateTime? @map("created_at")
+  updatedAt     DateTime? @map("updated_at")
+}
+
+model RequestForm {
+  // Menggunakan camelCase untuk Prisma, tapi map ke snake_case di DB
+  id                String  @id @default(cuid())
+  fullName          String? @map("full_name") //Nama Lengkap
+  email             String?
+  nik               String? //NIK
+  nip               String? //NIP
+  position          String? //Jabatan
+  unit              String? //OPD
+  phoneNumber       String? @map("phone_number") // Nomor Telpon
+  description       String? // Deskripsi umum atau terkait sertifikat
+  identityImage     String? @map("identity_image") // URL gambar identitas
+  status_request    String?  // Status Tindakan
+  ticket            String? @unique // Ticket
+  createdAt         DateTime? @map("created_at")
+  updatedAt         DateTime? @map("updated_at")
+
+  // Relasi ke semua log yang dimiliki Form ini
+  logStatus log_status[]
+}
+
+model log_status {
+  id              String    @id @default(cuid())
+  formId          String    // foreign key ke RequestForm.id
+  statusName      String
+  note            String?    // opsional, catatan tambahan
+  createdAt       DateTime @map("created_at") @default(now())
+
+  requestForm RequestForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+}
+
