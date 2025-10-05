@@ -12,7 +12,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Website Persandian dan Statistik",
+  title: "Website Persandian Barito Utara",
   description: "Generate",
 }
 
