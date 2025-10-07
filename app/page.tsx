@@ -5,6 +5,9 @@ import MotionWrapper from "@/components/MotionWrapper";
 import Link from "next/link";
 import TaskCard from "@/components/TaskCard";
 import InstagramCard from "@/components/InstagramCard";
+import SplitText from "@/components/SplitText";
+import { FaAddressBook } from "react-icons/fa";
+import { MdTrackChanges } from "react-icons/md";
 
 export default function Home() {
   return (
@@ -20,9 +23,10 @@ export default function Home() {
               hoverFillColor='#4768fc'
               />
           </div>
+         
           <h1 className="font-bold text-6xl max-w-4xl text-center text-white">
               <BlurText
-                text="Dinas Komunikasi, Informatika dan Persandian"
+                text="BIDANG PERSANDIAN"
                 delay={500}
                 animateBy="words"
                 direction="left"
@@ -32,13 +36,45 @@ export default function Home() {
                 onAnimationComplete={null}
               />
           </h1> 
-          <h2 className="font-thin text-center text-white z-10">
-                Kabupaten Barito Utara - Kalimantan Tengah
-          </h2>
 
+          <h1 className="z-20 font-regular max-w-4xl text-center text-white">
+          <SplitText
+            text="Dinas Komunikasi, Informatika dan Persandian Kabupaten Barito Utara"
+            className="text-xl font-thin text-center"
+            delay={100}
+            duration={0.9}
+            ease="power3.out"
+            splitType="words"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+            onLetterAnimationComplete={null}
+          />
+          </h1>
+         
+          <MotionWrapper direction="up">
+          <div className="flex gap-2 justify-center pt-6 px-2 ">
+            <Link href="/tte" className="flex gap-2 items-center z-10 bg-blues text-white border px-4 py-6 rounded-md  hover:cursor-pointer hover:scale-98 animation-all duration-300 hover:bg-yellows hover:text-blues hover:rounded-xl hover:border-yellows">
+              <FaAddressBook size={40} />
+              <h5 className="text-sm">
+                Layanan Tanda Tangan elektronik (TTE)
+              </h5>
+            </Link>
+            <Link href="/tracking" className="flex gap-2 items-center z-10 bg-blues text-white border px-4 py-6 rounded-md  hover:cursor-pointer hover:scale-98 animation-all duration-300 hover:bg-yellows hover:text-blues hover:rounded-xl hover:border-yellows">
+              <MdTrackChanges size={40} />
+              <h5 className="text-sm">
+                Tracking Tanda Tangan elektronik (TTE)
+              </h5>
+            </Link>
+          </div>
+          </MotionWrapper>
+          
+          <div className="my-2"></div>
           <MotionWrapper direction="up">
           <div className="flex justify-center pt-6 ">
-            <Link href="/#task" className="btn-alpha z-10 bg-yellows text-blues px-4 py-1 rounded-full  hover:cursor-pointer hover:px-10">
+            <Link href="/#task" className="btn-alpha z-10 bg-yellows text-blues px-4 py-1 rounded-full  hover:cursor-pointer hover:px-10 hover:font-bold">
               View More
             </Link>
           </div>

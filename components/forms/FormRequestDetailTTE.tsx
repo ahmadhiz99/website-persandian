@@ -214,7 +214,7 @@ export default function FormRequestDetailTTE(
     {/* Status Request */}
     <div>
       <p className="text-sm text-gray-500">Status Request</p>
-      <p className="text-sm font-semibold">
+      <p className="text-sm font-semibold bg-slate-500 inline-block px-2 py-1 rounded text-white">
         {statusTicket.map((status)=>(
           statusRequest == status.id ? status.value : null
         ))}
@@ -223,8 +223,16 @@ export default function FormRequestDetailTTE(
 
     {/* createdAt */}
     <div>
-      <p className="text-sm text-gray-500">Created At</p>
-      <p className="text-sm font-semibold">{createdAt}</p>
+      <p className="text-sm text-gray-500">Created At (Dibuat)</p>
+      <p className="text-sm font-semibold">
+        {new Date(createdAt).toLocaleString('id-ID', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        })}
+      </p>
     </div>
   </div>
 

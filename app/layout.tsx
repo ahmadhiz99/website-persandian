@@ -23,16 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.className}`}
-      >
+        <body className={`${poppins.className} flex flex-col min-h-screen`}>
+
         <Providers>
           <Header />
 
-          <div className="">
-            <Toaster position="top-center" richColors   />
-            {children}
-          </div>
+          <main className="flex-grow">
+          <Toaster position="top-center" richColors />
+          {children}
+        </main>
 
         <Footer />
         </Providers>

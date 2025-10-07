@@ -130,8 +130,6 @@ export async function POST(request: Request){
     }
 }
 
-// const email_tujuan = "ahmadhiz2000@gmail.com";
-// const email_tujuan = "husinnuralamkhj@gmail.com";
 const handleEmail = async (email:string, ticket:string) => {
   const htmlContent = `
   <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -198,7 +196,7 @@ export async function GET(req:Request) {
           prisma.requestForm.findMany({
             skip,
             take: limit,
-            orderBy: { id: 'asc'},
+            orderBy: { createdAt: 'desc'},
           }),
           prisma.requestForm.count(),
         ]);

@@ -8,7 +8,7 @@ import { IoIosMail } from "react-icons/io";
 
 export default function Footer () {
     return(
-        <footer className="flex-col items-center gap-8 justify-center py-10 px-20 bg-radial from-[#031A65] to-[#00061B]">
+        <footer className=" mb-0 flex-col items-center gap-8 justify-center py-10 px-20 bg-radial from-[#031A65] to-[#00061B]">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <div className="my-2 relative h-[40] w-[200] rounded-sm overflow-hidden animate-all duration-300 hover:scale-105">
                     <Image

@@ -203,7 +203,7 @@ export default function FormRequestTTE() {
       onSubmit={handleSubmit} 
       className="flex flex-col py-10 gap-4 max-w-6xl mx-auto px-6 border border-gray-300 rounded shadow-md"
     >
-      <h1 className="text-xl font-bold text-center mb-1">Form Request TTE</h1>
+      <h1 className="text-3xl font-bold text-center my-4">Form Permintaan Tanda Tangan Elektronik (TTE)</h1>
       
       {/* Nama Lengkap */}
       <div>
@@ -340,7 +340,7 @@ export default function FormRequestTTE() {
         </h1>
         <textarea
           className={`border ${errors.description ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500`}
-          placeholder="Masukkan Description (minimal 10 karakter)"
+          placeholder="Masukkan Deskripsi Permintaan (minimal 10 karakter)"
           value={description}
           rows={4}
           onChange={(e) => {
@@ -354,7 +354,7 @@ export default function FormRequestTTE() {
       {/* Identity Image */}
       <div className={`border ${errors.identityImage ? 'border-red-500' : 'border-slate-200'} p-4 rounded-lg`}>
         <h2 className="text-lg font-semibold mb-3">
-          Identity Image <span className="text-red-500">*</span>
+          Identity Image (KTP)<span className="text-red-500">*</span>
         </h2>
         {identityPreview && (
           <div className="mb-3 h-48 w-48 relative">

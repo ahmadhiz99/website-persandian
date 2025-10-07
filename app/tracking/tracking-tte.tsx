@@ -202,13 +202,34 @@ export default function TrackingTTEPage(){
                         {/* Rincian */}
                         <h6 className="text-sm font-bold mt-3 mb-1">Rincian:</h6>
                         {logStatus.map((log, i) => (
-                            <h6
-                            key={log.id}
-                            className={`text-xs ${i === 0 ? 'font-semibold' : 'font-thin'}`}
+                            <div key={log.id} 
+                                className={`text-xs p-1 flex gap-1 my-2 ${i === 0 ? 'font-semibold bg-slate-200' : 'font-thin bg-slate-100'}`}
                             >
-                            {new Date(log.createdAt).toLocaleTimeString('id-ID')} -{" "}
-                            {log.note || log.statusName}
-                            </h6>
+                                <div >
+                                    <h5
+                                    className={`text-xs ${i === 0 ? 'font-semibold' : 'font-thin'}`}
+                                    >
+                                        {new Date(log.createdAt).toLocaleTimeString('id-ID')} -
+                                    </h5>
+                                </div>
+                                <div>
+                                    <h5
+                                    className={`text-xs ${i === 0 ? 'font-semibold' : 'font-thin'}`}
+                                    >
+                                        {log.statusName}
+                                    </h5>
+                                    {
+                                        log.note && (
+                                            <p className="text-[10px] font-semibold"> 
+                                                Note: 
+                                                <span className=" font-thin">
+                                                    {log.note}
+                                                </span>
+                                            </p>
+                                        )
+                                    }
+                                </div>
+                            </div>
                         ))}
                         </div>
 

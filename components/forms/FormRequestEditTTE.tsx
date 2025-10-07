@@ -50,6 +50,7 @@ export default function FormRequestEditTTE(
   const [email, setEmail] = useState(initialEmail || '');
   const [description, setDescription] = useState(initialDescription || '');
   const [statusRequest, setStatusRequest] = useState(initialStatusRequest || '');
+  const [note, setNote] = useState('');
   const [ticket] = useState(initialTicket || '');
 
   // Ref untuk setiap elemen input file
@@ -107,8 +108,12 @@ export default function FormRequestEditTTE(
       formData.append('position', position);
       formData.append('phoneNumber', phoneNumber);
       formData.append('description', description);
-      formData.append('statusRequest', statusRequest);
       formData.append('ticket', ticket);
+      
+      if (statusRequest != initialStatusRequest){
+        formData.append('statusRequest', statusRequest)
+        formData.append('note', note);
+      };
 
       const response = await fetch(`/api/requestForm/${initialId}`, {
         method: 'PATCH',
@@ -123,24 +128,7 @@ export default function FormRequestEditTTE(
 
       setResult(data);
 
-      // setFullName('');
-      // setNik('');
-      // setNip('');
-      // setUnit('');
-      // setPosition('');
-      // setPhoneNumber('');
-      // setEmail('');
-      // setDescription('');
-      // setIdentityImage(null);
-      // setIdentityPreview(null);
-
-      // Mereset nilai input file DOM secara langsung
-    // if (identityImageRef.current) {
-    //   identityImageRef.current.value = '';
-    // }
-      
       toast.success('Form Berhasil Dikirimkan');
-      // router.refresh(); // Ini yang akan memicu re-render Server Component
       router.replace("/admin/request-tte");
       setIsLoading(false);
 
@@ -274,16 +262,31 @@ export default function FormRequestEditTTE(
           <p className="text-sm text-gray-500 mt-1">Upload your identity image (JPEG, PNG)</p>
         </div>
 
-        <div>
-          <h1 className="text-lg font-semibold mb-1">Status Request</h1>
-          <select className='border border-gray-300 px-3 py-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500'
-            value={statusRequest} onChange={(e) => setStatusRequest(e.target.value)}>
-            {statusTicket.map((status)=> (
-              <option key={status.id} value={status.id}>
-                {status.label}
-              </option>
-            ))}
-          </select>
+        <div className='border rounded -lg p-4'>
+          <h1 className="text-lg font-semibold mb-2">Status Request</h1>
+          <div className='grid gap-2'>
+            <div>
+              <h2>Ubah Status:</h2>
+              <select className='border border-gray-300 px-3 py-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500'
+                value={statusRequest} onChange={(e) => setStatusRequest(e.target.value)}>
+                {statusTicket.map((status)=> (
+                  <option key={status.id} value={status.id}>
+                    {status.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {statusRequest !== initialStatusRequest &&
+            (
+              <div className='w-full'>
+                <h2>Pesan atatu catatan:</h2>
+                <textarea name="note" onChange={(e) => setNote(e.target.value)} id=""  className='border w-full rounded p-2 border-slate-300' />
+              </div>
+            )
+            }
+
+          </div>
         </div>
 
       {error && <p className="text-red-500 text-sm">{error}</p>}

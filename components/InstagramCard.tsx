@@ -24,7 +24,7 @@ export default function InstagramCard() {
           }
         }
         .animate-scroll {
-          animation: scroll 40s linear infinite;
+          animation: scroll 20s linear infinite;
         }
         .animate-scroll:hover {
           animation-play-state: paused;
@@ -39,7 +39,7 @@ export default function InstagramCard() {
                 src={`${url}embed`}
                 width="328"
                 height="400"
-                allowTransparency={true}
+                // allowTransparency={true}
                 className="w-full h-full"
               />
             </div>
