@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { sendEmail } from "@/lib/email";
 import path from "path";
 import fs from 'fs';
 import { nanoid } from "nanoid";
@@ -118,7 +119,8 @@ export async function POST(request: Request){
             }
         })
 
-        handleEmail(email, ticket);
+        // Kirim email menggunakan lib
+        await handleEmail(email, ticket);
 
         console.log('New Request Form Created:', newFormRequest);
 
@@ -130,7 +132,7 @@ export async function POST(request: Request){
     }
 }
 
-const handleEmail = async (email:string, ticket:string) => {
+const handleEmail = async (email: string, ticket: string) => {
   const htmlContent = `
   <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     <h2 style="color: #031A65;">Nomor Antrian Anda</h2>
@@ -157,31 +159,23 @@ const handleEmail = async (email:string, ticket:string) => {
   </div>
   `;
 
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL_LOCAL}/api/send-email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        to: email,
-        subject: "Nomor Ticket Pendaftaran",
-        text: "Nomor Antrian anda adalah " + ticket,
-        html: htmlContent,
-      }),
+  try {
+    const result = await sendEmail({
+      to: email,
+      subject: "Nomor Ticket Pendaftaran",
+      text: "Nomor Antrian anda adalah " + ticket,
+      html: htmlContent,
     });
 
-
-      const data = await res.json();
-      if (data.success) {
-        alert("Email berhasil dikirim");
-      } else {
-        alert("Gagal mengirim email");
-      }
-    } catch (error) {
-      console.error("Error:", error);
+    if (result.success) {
+      console.log("✅ Email berhasil dikirim ke:", email);
+    } else {
+      console.error("❌ Gagal mengirim email:", result.error);
     }
-  };
+  } catch (error) {
+    console.error("❌ Error saat mengirim email:", error);
+  }
+};
 
 // Handler untuk method GET (Mengambil semua user)
 export async function GET(req:Request) {

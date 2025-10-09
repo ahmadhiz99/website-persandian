@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import path from "path";
 import fs from 'fs';
 import { statusTicket } from '@/constants/statusTicket';
+import { sendEmail } from "@/lib/email";
 
 // Konfigurasi folder upload
 const UPLOAD_DIRS = {
@@ -145,7 +146,7 @@ export async function PATCH(
       
       // Log jika email gagal (tapi tidak menghentikan response)
       if (!emailResult.success) {
-        console.error('Email notification failed:', emailResult.message);
+        console.error('Email notification failed:', emailResult.error);
       }
     }
     
@@ -201,49 +202,48 @@ const handleEmail = async (
   }> = {
     '1': {
       alias: 'queue',
-      color: '#F59E0B', // Orange - Dalam Antrian
+      color: '#F59E0B',
       title: 'Permohonan Sedang Diproses',
       message: 'Permohonan Anda sedang dalam tahap review.',
       displayText: 'DALAM ANTRIAN'
     },
     '2': {
       alias: 'validation',
-      color: '#3B82F6', // Blue - Validasi
+      color: '#3B82F6',
       title: 'Permohonan Dalam Validasi',
       message: 'Permohonan Anda sedang dalam tahap validasi.',
       displayText: 'VALIDASI'
     },
     '3': {
       alias: 'calling',
-      color: '#8B5CF6', // Purple - Pemanggilan
+      color: '#8B5CF6',
       title: 'Permohonan Menunggu Konfirmasi',
       message: 'Silakan konfirmasi panggilan untuk melanjutkan permohonan Anda.',
       displayText: 'PEMANGGILAN'
     },
     '4': {
       alias: 'verification',
-      color: '#06B6D4', // Cyan - Verifikasi
+      color: '#06B6D4',
       title: 'Permohonan Dalam Verifikasi',
       message: 'Permohonan Anda sedang dalam tahap verifikasi akhir.',
       displayText: 'VERIFIKASI'
     },
     '5': {
       alias: 'completed',
-      color: '#10B981', // Green - Selesai
+      color: '#10B981',
       title: 'Permohonan Selesai',
       message: 'Selamat! Permohonan Anda telah selesai diproses.',
       displayText: 'SELESAI'
     },
     '6': {
       alias: 'rejected',
-      color: '#EF4444', // Red - Ditolak
+      color: '#EF4444',
       title: 'Permohonan Ditolak',
       message: 'Mohon maaf, permohonan Anda tidak dapat disetujui.',
       displayText: 'DITOLAK'
     }
   };
 
-  // Pastikan status adalah string dan ambil konfigurasi yang sesuai
   const config = statusConfig[status.toString()] || {
     alias: 'unknown',
     color: '#6B7280',
@@ -338,29 +338,26 @@ const handleEmail = async (
   `;
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send-email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        to: email,
-        subject: `Update Status Permohonan - ${ticket}`,
-        text: `Nomor Ticket: ${ticket}\nStatus: ${config.displayText}\n${note ? `Catatan: ${note}` : ''}`,
-        html: htmlContent,
-      }),
+    // ✅ GANTI fetch dengan panggil sendEmail langsung
+    const result = await sendEmail({
+      to: email,
+      subject: `Update Status Permohonan - ${ticket}`,
+      text: `Nomor Ticket: ${ticket}\nStatus: ${config.displayText}\n${note ? `Catatan: ${note}` : ''}`,
+      html: htmlContent,
     });
 
-    const data = await res.json();
-    if (data.success) {
-      console.log("Email berhasil dikirim ke:", email);
+    if (result.success) {
+      console.log("✅ Email berhasil dikirim ke:", email);
       return { success: true, message: "Email berhasil dikirim" };
     } else {
-      console.error("Gagal mengirim email:", data);
-      return { success: false, message: "Gagal mengirim email" };
+      console.error("❌ Gagal mengirim email:", result.error);
+      return { success: false, error: result.error };
     }
   } catch (error) {
-    console.error("Error mengirim email:", error);
-    return { success: false, message: "Terjadi kesulitan saat mengirim email" };
+    console.error("❌ Error mengirim email:", error);
+    return { 
+      success: false, 
+      error: error instanceof Error ? error.message : "Terjadi kesulitan saat mengirim email" 
+    };
   }
 };
