@@ -312,7 +312,7 @@ const handleEmail = async (
       <p>Silakan cek berkala menggunakan fitur tracking dengan nomor ticket tersebut.</p>
       
       <div style="text-align: center; margin-top: 30px;">
-        <a href="${process.env.NEXT_PUBLIC_BASE_URL}/tracking" style="
+        <a href="${process.env.NEXT_PUBLIC_BASE_URL}/tracking?ticket=${ticket}" style="
           background: #031A65;
           color: #fff;
           padding: 12px 30px;
