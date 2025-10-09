@@ -158,7 +158,7 @@ const handleEmail = async (email:string, ticket:string) => {
   `;
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send-email`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL_LOCAL}/api/send-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
