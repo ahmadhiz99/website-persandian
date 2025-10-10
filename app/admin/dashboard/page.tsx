@@ -89,7 +89,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="flex w-full gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 w-full gap-4">
         <div className="border border-slate-200 shadow-md rounded p-4 text-center w-full">
           <p className="text-4xl font-black">{queue}</p>
           <h1 className="text-sm">ANTRIAN</h1>

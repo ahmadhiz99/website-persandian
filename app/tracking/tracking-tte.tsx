@@ -103,7 +103,7 @@ export default function TrackingTTEPage(){
             </form>
             <div className='flex gap-2 justify-evenly'>
                 <div className='hover:scale-105 hover:cursor-pointer hover:contrast-120'>
-                    <div className={`rounded-full p-6
+                    <div className={`rounded-full inline-block p-4 sm:p-6
                         ${status == '1' ? 'tracking-icon-now': 
                         status < '1' ? 'tracking-icon-after' : 
                         'tracking-icon-before'}
@@ -118,7 +118,7 @@ export default function TrackingTTEPage(){
                     >Antrian</h1>
                 </div>
                 <div className='hover:scale-105 hover:cursor-pointer hover:contrast-120'>
-                    <div className={`rounded-full p-6
+                    <div className={`rounded-full inline-block p-4 sm:p-6
                         ${status == '2' ? 'tracking-icon-now': 
                         status < '2' ? 'tracking-icon-after' : 
                         'tracking-icon-before'}
@@ -133,7 +133,7 @@ export default function TrackingTTEPage(){
                     >Diproses</h1>
                 </div>
                 <div className='hover:scale-105 hover:cursor-pointer hover:contrast-120'>
-                    <div className={`rounded-full p-6
+                    <div className={`rounded-full inline-block p-4 sm:p-6
                         ${status == '3' ? 'tracking-icon-now': 
                         status < '3' ? 'tracking-icon-after' : 
                         'tracking-icon-before'}
@@ -148,7 +148,7 @@ export default function TrackingTTEPage(){
                     >Dipanggil</h1>
                 </div>
                 <div className='hover:scale-105 hover:cursor-pointer hover:contrast-120'>
-                    <div className={`rounded-full p-6
+                    <div className={`rounded-full inline-block p-4 sm:p-6
                         ${status == '4' ? 'tracking-icon-now': 
                         status < '4' ? 'tracking-icon-after' : 
                         'tracking-icon-before'}
@@ -163,7 +163,7 @@ export default function TrackingTTEPage(){
                     >Diverifikasi</h1>
                 </div>
                 <div className='hover:scale-105 hover:cursor-pointer hover:contrast-120'>
-                    <div className={`rounded-full p-6
+                    <div className={`rounded-full inline-block p-4 sm:p-6
                         ${status == '5' ? 'tracking-icon-now ': 
                         status < '5' ? 'tracking-icon-after' : 
                         'tracking-icon-before'}
@@ -179,13 +179,6 @@ export default function TrackingTTEPage(){
                 </div>
                
             </div>
-
-            {/* <div className='my-6 py-4 px-4 shadow-md rounded border border-slate-200'>
-                <h6 className=' text-xs font-semibold my-1'>Status : <span className="text-yellow-500 uppercase">{status}</span> </h6>
-                <h6 className=' text-xs font-bold my-3'>Rincian:</h6>
-                <h6 className=' text-xs font-semibold'>19:17:21 - File Diproses</h6>
-                <h6 className='text-xs font-thin'>10:22:10 - Masuk Kedalam Antrian</h6>
-            </div> */}
 
             {status > '0' ?
                 (

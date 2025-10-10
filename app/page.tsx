@@ -24,7 +24,7 @@ export default function Home() {
               />
           </div>
          
-          <h1 className="font-bold text-6xl max-w-4xl text-center text-white">
+          <h1 className="font-bold text-4xl sm:text-6xl max-w-4xl text-center text-white">
               <BlurText
                 text="BIDANG PERSANDIAN"
                 delay={500}
@@ -147,7 +147,7 @@ export default function Home() {
             <h1 className="font-bold text-4xl">KEGIATAN</h1>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-4 p-2 max-w-4xl mt-10 ">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 md:grid-cols-4 md:gap-4 p-2 max-w-4xl mt-10 ">
            
               <div className="relative h-[200] w-[200] rounded-sm overflow-hidden animate-all duration-300 hover:scale-105 hover:rounded-xl">
                 <Image
